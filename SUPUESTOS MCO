@@ -1,0 +1,8 @@
+HETEROCEDASTICIDAD
+
+Importante: en presencia de heterocedasticidad los estimadores MCO no son MELI, al no existir varianza mínima dentro de los estimadores lineales insesgados,
+pero siguen siendo en todo caso insesgados y consistentes. (pierde eficiencia).
+
+
+
+
