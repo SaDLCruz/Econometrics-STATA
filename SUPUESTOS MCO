@@ -3,6 +3,72 @@ HETEROCEDASTICIDAD
 Importante: en presencia de heterocedasticidad los estimadores MCO no son MELI, al no existir varianza mínima dentro de los estimadores lineales insesgados,
 pero siguen siendo en todo caso insesgados y consistentes. (pierde eficiencia).
 
+--------------
+Método Gráfico 
+--------------
+
+Luego de la estimación del modelo "ideal", cuyas características iniciales parecen ser las adecuadas de acuerdo con la teoría y la revisión de antecedentes,
+se realizan los siguientes pasos:
+
+1. creación de una variable y("gorro") que contiene su comportamiento (predicción)
+    
+    predict yhat,xb
+    
+2. creación de una variable predicha del error
+
+    predict uhat, residual
+
+3. elevo al cuadrado la anterior variable y realizo la gráfica 
+
+    generate uhat2 = uhat*uhat
+    twoway (scatter uhat yhat)
+    twoway (scatter uhat2 yhat)
+
+Si existe un comportamiento sistemático entre el cruce de los valores predichos de la variable dependiente y los residuos, podemos sospechar de la presencia de 
+heterocedasticidad. 
+
+  En algunos casos el estudiante puede estar interesado en conocer el comportamiento de los residuos respecto a una variable explicativa, en este caso se genera
+  la gráfica haciendo referencia al residuo. 
+  
+  twoway (scatter uhat "variable explicativa")
+  
+Existen pruebas más robustas para determinar la presencia de heterocedasticidad, los dos test más ampliamente utilizados son Breusch-Pagan y White.
+
+*Breusch - Pagan*
+
+La hipótesis nula es que no hay heterocedasticidad en contraste con la hipótesis alternativa, si existe heterocedasticidad. 
+
+  estat hettest
+  
+Interpretación: con una significancia del valor p del 5% se rechaza la hipótesis nula.
+
+*White*
+
+La hipótesis nula es que no hay heterocedasticidad en contraste con la hipotesis alternativa, si existe heterocedasticidad.
+
+  estat imtest, white 
+
+Interpretación: con una significancia del valor p del 5% se rechaza la hipótesis nula.
+
+-------------------------------------------
+¿Cómo darle manejo a la heterocedasticidad?
+-------------------------------------------
+
+En particular es posible solucionar el problema de la hetorocedasticidad a través de los estimados robustos de white, si aplicación en STATA es realtivamente
+sencilla, se trata de agregar al final del modelo, la opción robust. 
+
+Otra opción se relaciona con la transformación logaritmica.
+
+  gen nombre de la variable = ln(variable)
+
+VARIABLES OMITIDAS Y FORMA FUNCIONAL INCORRECTA
+
+STATA cuenta con la prueba de RESET en donde se pretende identificar errores de identificación. La hipótesis nula de la prueba es que el modelo está bien 
+espacificado. 
+
+  estat ovtest
+  
+Interpretación: con una significancia del valor p del 5% se rechaza la hipótesis nula.
 
 
 
